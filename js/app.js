@@ -4,6 +4,7 @@ const pack = document.querySelector('.pack');
 let moves = 0;
 const moveCounter = document.querySelector('.moves');
 let matches = 0;
+let openList = [];
 
 let cardDeck = [
     'fa-diamond', 'fa-diamond',
@@ -62,38 +63,98 @@ function newDeck() {
     }
     //Add HTML to DOM
     pack.appendChild(fragment);
-    //Reset move counter
-    moves = 0;
-    moveCounter.textContent = moves.toString();
 }
 
 //Event Listener for newDeck
 
 reshuffle.addEventListener('mousedown', function() {
     newDeck();
+    moves = 0;
+    moveCounter.textContent = moves.toString();
+    openList = [];
+    matches = 0;
 });
 
 
-/*
- * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */
-
  // Card listener
+ /*
+  * set up the event listener for a card. If a card is clicked:
+  *  - display the card's symbol (put this functionality in another function that you call from this one)
+  *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
+  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
+  */
 
 pack.addEventListener('click', function(evt) {
-    if ((evt.target.nodeName == 'LI') && (evt.target.classList.contains('open') == false) && (evt.target.classList.contains('match') == false)) {
+    //check card should be flippable
+    if ((evt.target.nodeName == 'LI') && (evt.target.classList.contains('open') == false) && (evt.target.classList.contains('match') == false) && (openList[1] == null)) {
+        //increment move counter
         moves += 1;
         moveCounter.textContent = moves.toString();
         //display card
         evt.target.classList.add('open');
         evt.target.classList.add('show');
-        //addToOpenList(evt.target);
+        //Send to openList logic function
+        openListLogic(evt.target);
     }
 })
+
+//openList logic function
+/*
+ *  - if the list already has another card, check to see if the two cards match
+ *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
+ *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
+ *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
+ */
+
+function openListLogic(card) {
+    if (openList == false) {
+        openList.push(card);
+        console.log(openList);
+    } else {
+        openList.push(card);
+        console.log(openList);
+        if (openList[2] != null) {console.log("Error - too many in openList")}
+        else {
+            if (openList[0].firstChild.className == openList[1].firstChild.className) {
+                matchCards();
+            } else {
+                setTimeout(function() {
+                    hideCards();
+                }, 2500);
+            }
+        }
+    }
+}
+
+//Match cards by changing classes (one per time for IE)
+function matchCards() {
+    openList[0].classList.remove('open');
+    openList[0].classList.remove('show');
+    openList[0].classList.add('match');
+    openList[1].classList.remove('open');
+    openList[1].classList.remove('show');
+    openList[1].classList.add('match');
+    //resetting openList array
+    openList = [];
+    //inc matches and check if won
+    matches += 1;
+    if (matches == 8) {
+        winnerScreen();
+    }
+}
+
+//Hiding cards by changing classes (one per time for IE)
+function hideCards() {
+    openList[0].classList.remove('open');
+    openList[0].classList.remove('show');
+    openList[1].classList.remove('open');
+    openList[1].classList.remove('show');
+    //resetting openList array
+    openList = [];
+}
+
+//Winner screen function - MORE TO CODE HERE!!
+
+function winnerScreen() {
+    alert("YOU WIN!");
+}
