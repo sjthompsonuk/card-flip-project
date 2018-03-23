@@ -4,6 +4,7 @@ html, body {
    padding: 0;
    width: 100%;
    display: block;
+   min-width: 200px;
  }
 
 img {
@@ -49,7 +50,8 @@ h1 {
 .pack {
     display: flex;
     flex-wrap: wrap;
-    width: 90%
+    width: 90%;
+    margin: 0 auto;
 
 }
 
@@ -64,7 +66,7 @@ h1 {
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    margin: 0.5em 1em;
+    margin: 0.5em auto;
 }
 
 .deck .card {
@@ -233,4 +235,46 @@ input[type="text"]
     font-family: 'Coda', cursive;
     font-size: 24px;
     text-align: center;
+}
+
+@media screen and (max-width: 400px) {
+    body {
+        font-size: 0.5em;
+        margin-top: 10%;
+    }
+    .fa {
+        font-size: 0.6em;
+    }
+    .fa-star,
+    .fa-repeat {
+        font-size: 1em;
+    }
+    .deck .card {
+        height: 50px;
+    }
+    .deck {
+        min-height: 250px;
+    }
+    .modal-content {
+        min-height: 150px;
+    }
+}
+
+@media screen and (min-width: 580px) {
+    body {
+        font-size: 1.1em;
+    }
+    .deck .card {
+        height: 110px;
+    }
+    .deck {
+        min-height: 570px;
+    }
+}
+
+@media screen and (min-width: 680px) {
+    body {
+        width: 680px;
+        margin: 0 auto;
+    }
 }
