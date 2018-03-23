@@ -5,6 +5,9 @@ let moves = 0;
 const moveCounter = document.querySelector('.moves');
 let matches = 0;
 let openList = [];
+const starsImage = document.querySelector('.stars');
+const threeStarsHTML = starsImage.innerHTML;
+let stars = 3;
 
 let cardDeck = [
     'fa-diamond', 'fa-diamond',
@@ -71,6 +74,8 @@ reshuffle.addEventListener('mousedown', function() {
     newDeck();
     moves = 0;
     moveCounter.textContent = moves.toString();
+    stars = 3;
+    updateStars();
     openList = [];
     matches = 0;
 });
@@ -90,6 +95,8 @@ pack.addEventListener('click', function(evt) {
         //increment move counter
         moves += 1;
         moveCounter.textContent = moves.toString();
+        //update stars
+        updateStars();
         //display card
         evt.target.classList.add('open');
         evt.target.classList.add('show');
@@ -156,5 +163,16 @@ function hideCards() {
 //Winner screen function - MORE TO CODE HERE!!
 
 function winnerScreen() {
-    alert("YOU WIN!");
+    alert("YOU WIN! and have " + stars);
+}
+
+// Stars function runs each time a card is clicked and a move registered
+
+function updateStars() {
+    if ((moves == 30) || (moves == 40)) {
+        starsImage.removeChild(starsImage.lastElementChild);
+        stars -= 1;
+    }   else if (moves == 0) {
+        starsImage.innerHTML = threeStarsHTML;
+    }
 }
