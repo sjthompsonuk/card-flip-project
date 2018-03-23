@@ -9,6 +9,7 @@ const starsImage = document.querySelector('.stars');
 const threeStarsHTML = starsImage.innerHTML;
 let stars = 3;
 let timer;
+let hider;
 const minsTimer = document.querySelector('.mins');
 const secsTimer = document.querySelector('.secs');
 const tensTimer = document.querySelector('.tens');
@@ -97,6 +98,8 @@ reshuffle.addEventListener('mousedown', function() {
 
 function resetAll() {
     // Get a new shuffled deck and reset variables
+    // Removes bug causing error if attempting to reset while mismatch cards wait to hide
+    window.clearTimeout(hider);
     newDeck();
     moves = 0;
     moveCounter.textContent = moves.toString();
@@ -144,7 +147,7 @@ function openListLogic(card) {
             if (openList[0].firstChild.className == openList[1].firstChild.className) {
                 matchCards();
             } else {
-                setTimeout(function() {
+                hider = window.setTimeout(function() {
                     hideCards();
                 }, 2500);
             }
@@ -154,20 +157,23 @@ function openListLogic(card) {
 
 //Match cards by changing classes (one class per time for IE compatibility)
 function matchCards() {
-    openList[0].classList.remove('open');
-    openList[0].classList.remove('show');
-    openList[0].classList.add('match');
-    openList[1].classList.remove('open');
-    openList[1].classList.remove('show');
-    openList[1].classList.add('match');
-    //resetting openList array
-    openList = [];
-    //inc matches and check if won
-    matches += 1;
-    if (matches == 8) {
-        stopTimer();
-        updateScores();
-        winnerScreen();
+    //removes bug where a manual reset while waiting for cards to unflip caused an error
+    if (openList !== []) {
+        openList[0].classList.remove('open');
+        openList[0].classList.remove('show');
+        openList[0].classList.add('match');
+        openList[1].classList.remove('open');
+        openList[1].classList.remove('show');
+        openList[1].classList.add('match');
+        //resetting openList array
+        openList = [];
+        //inc matches and check if won
+        matches += 1;
+        if (matches == 8) {
+            stopTimer();
+            updateScores();
+            winnerScreen();
+        }
     }
 }
 
