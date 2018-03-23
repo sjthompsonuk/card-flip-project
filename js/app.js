@@ -15,7 +15,17 @@ const tensTimer = document.querySelector('.tens');
 let mins = 0;
 let secs = 0;
 let tens = 0;
-
+let playerName = 'Sam';
+// 6th place score for adding data before sort and delete. Placeholders needed to make sorting function simple.
+let scores = [
+    {name: 'Sam', starValue: 3, timeValue: '0:10', scoreValue: 10},
+    {name: 'No One Yet', starValue: 0, timeValue: '0:00', scoreValue: 0},
+    {name: 'No One Yet', starValue: 0, timeValue: '0:00', scoreValue: 0},
+    {name: 'No One Yet', starValue: 0, timeValue: '0:00', scoreValue: 0},
+    {name: 'No One Yet', starValue: 0, timeValue: '0:00', scoreValue: 0},
+    {}
+];
+//Set of values relate to Font-Awesome icons
 let cardDeck = [
     'fa-diamond', 'fa-diamond',
     'fa-paper-plane-o', 'fa-paper-plane-o',
@@ -41,13 +51,6 @@ function shuffle(array) {
 
     return array;
 }
-
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
 
 // New Deck function
 function newDeck() {
@@ -90,13 +93,7 @@ reshuffle.addEventListener('mousedown', function() {
 });
 
 
- // Card listener
- /*
-  * set up the event listener for a card. If a card is clicked:
-  *  - display the card's symbol (put this functionality in another function that you call from this one)
-  *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
-  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
-  */
+// Card click listener
 
 pack.addEventListener('click', function(evt) {
     //check card should be flippable
@@ -118,13 +115,7 @@ pack.addEventListener('click', function(evt) {
     }
 })
 
-//openList logic function
-/*
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */
+//openList logic function - decides from selected card what action to take
 
 function openListLogic(card) {
     if (openList == false) {
@@ -146,7 +137,7 @@ function openListLogic(card) {
     }
 }
 
-//Match cards by changing classes (one per time for IE)
+//Match cards by changing classes (one class per time for IE compatibility)
 function matchCards() {
     openList[0].classList.remove('open');
     openList[0].classList.remove('show');
@@ -161,6 +152,7 @@ function matchCards() {
     if (matches == 8) {
         stopTimer();
         winnerScreen();
+        updateScores();
     }
 }
 
@@ -174,11 +166,11 @@ function hideCards() {
     openList = [];
 }
 
-//Winner screen function - MORE TO CODE HERE!!
+//Winner screen function - MORE TO CODE HERE!! Add delay possibly too
 
 function winnerScreen() {
     // Give winning message
-    alert("YOU WON in " + mins + ":" + tens + secs + " with " + stars + "stars");
+    alert("YOU WON in " + mins + ":" + tens + secs + " with " + stars + "stars. See th leader board at the bottom");
 }
 
 // Stars function runs each time a card is clicked and a move registered
@@ -234,4 +226,20 @@ function iterateTimer() {
     tensTimer.innerText = tens;
     minsTimer.innerText = mins;
     runTimer();
+}
+
+function updateScores() {
+    //calculate new score and place 6th - index 5.
+    scores[5] = {name: playerName, starValue: stars, timeValue: mins + ':' + tens + secs, scoreValue: stars * (1000 - (mins * 60 + tens * 10 + secs))};
+    //order scores array by score
+    scores.sort(function (a, b) {
+        return (b.scoreValue - a.scoreValue);
+    });
+    //repopulate score table
+    scoresPopulate();
+}
+
+//repopulate from scores array indies 0-4 only (1st to 5th)
+function scoresPopulate() {
+
 }
