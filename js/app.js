@@ -20,6 +20,7 @@ let validBoard = false;
 let playerName = 'Sam';
 const scoreBoard = document.querySelector('.score-board');
 // 6th place score for adding data before sort and delete. Placeholders needed to make sorting function simple.
+let newScore = 0;
 let scores = [
     {name: '-', starValue: 0, timeValue: '0:00', scoreValue: 0},
     {name: '-', starValue: 0, timeValue: '0:00', scoreValue: 0},
@@ -42,7 +43,8 @@ let cardDeck = [
 // Modal variables
 const modal = document.querySelector('.modal');
 const close = document.querySelector('.close');
-const modalText = document.querySelector('.modal-text');
+const modalText1 = document.querySelector('.modal-text1');
+const modalText2 = document.querySelector('.modal-text2');
 const modalRetry = document.querySelector('.retry-button');
 const nameModal = document.querySelector('.name-modal');
 const nameSubmit = document.querySelector('.submit-button');
@@ -197,10 +199,12 @@ function hideCards() {
 function winnerScreen() {
     // Give winning message
     if (stars * (1000 - (mins * 60 + tens * 10 + secs)) == scores[0].scoreValue) {
-        modalText.innerText = "TOP SCORE!!!! YOU WON in... " + mins + ":" + tens + secs + " with " + stars + " stars."
+        modalText1.innerText = "TOP SCORE of " + newScore + "!!!!"
+        modalText2.innerText = " YOU WON in... " + mins + ":" + tens + secs + " with " + stars + " stars."
         modal.style.display = "block";
     } else {
-        modalText.innerText = "YOU WON in... " + mins + ":" + tens + secs + " with " + stars + " stars."
+        modalText1.innerText = "You scored " + newScore + " !!!!"
+        modalText2.innerText = "You won in " + mins + ":" + tens + secs + " with " + stars + " stars."
         modal.style.display = "block";
     }
 }
@@ -262,7 +266,8 @@ function iterateTimer() {
 
 function updateScores() {
     //calculate new score and place 6th - index 5.
-    scores[5] = {name: playerName, starValue: stars, timeValue: mins + ':' + tens + secs, scoreValue: stars * (1000 - (mins * 60 + tens * 10 + secs))};
+    newScore = stars * (1000 - (mins * 60 + tens * 10 + secs))
+    scores[5] = {name: playerName, starValue: stars, timeValue: mins + ':' + tens + secs, scoreValue: newScore};
     //order scores array by score
     scores.sort(function (a, b) {
         return (b.scoreValue - a.scoreValue);
@@ -320,4 +325,12 @@ nameSubmit.addEventListener('click', function(evt) {
     newPlayerName.value = null;
     openingWelcome = false;
     nameModal.style.display = 'none';
+})
+
+document.querySelector('.test-m1').addEventListener('click', function() {
+    modal.style.display = 'block';
+})
+
+document.querySelector('.test-m2').addEventListener('click', function() {
+    nameModal.style.display = 'block';
 })

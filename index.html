@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>Matching Game</title>
-    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
     <link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Coda">
     <link rel="stylesheet" href="css/app.css">
@@ -33,7 +33,7 @@
           </div>
 
           <div class="restart">
-            <span class="start">Start/Restart</span>
+            <span class="start">Restart</span>
             <i class="fa fa-repeat"></i>
         	</div>
         </section>
@@ -96,13 +96,17 @@
               <tbody class="score-board">
                 <tr>
                     <th>Rank</th>
-                    <th>Player Name</th>
+                    <th>Player</th>
                     <th>Stars</th>
                     <th>Time</th>
                     <th>Score</th>
                 </tr>
                 <tr>
                     <td>1</td>
+                    <td>Samuel T</td>
+                    <td>3</td>
+                    <td>5:00</td>
+                    <td>2134</td>
                 </tr>
                 <tr>
                     <td>2</td>
@@ -128,9 +132,9 @@
       <!-- Naming Modal content -->
       <div class="name-modal-content">
         <form class="name-form">
-            Please enter your name:
+            <p>Please enter your name:<p>
             <input type="text" class="inputName" name="nameField">
-            <input type="submit" class="submit-button" value="Click to Submit">
+            <p class="submit-button">Click to Submit</p>
         </form>
       </div>
 
@@ -142,17 +146,18 @@
 
       <!-- Modal content -->
       <div class="modal-content">
-        <p>Well Done
-            <span class="win-name"></span>
-        </p>
-        <p class="modal-text">Test Placeholder</p>
-        <p>See your place on the leader board below</p>
+        <p class="modal-text1">TOP SCORE of 1000!!!!</p>
+        <p class="modal-text2">YOU WON in 00:00 with 2 stars.</p>
+        <p>Check the leader board below</p>
         <p>Would you like to play again?</p>
         <span class="retry-button">Click to Play</span>
         <span class="close">Click to Close</span>
       </div>
 
     </div>
+
+    <p class="test-m1">Test M1</p>
+    <p class="test-m2">Test M2</p>
 
     <script src="js/app.js"></script>
 </body>
