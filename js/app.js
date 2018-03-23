@@ -1,5 +1,5 @@
 //Variables needed
-const reshuffle = document.querySelector('.fa-repeat');
+const reshuffle = document.querySelector('.restart');
 const pack = document.querySelector('.pack');
 let moves = 0;
 const moveCounter = document.querySelector('.moves');
@@ -8,6 +8,13 @@ let openList = [];
 const starsImage = document.querySelector('.stars');
 const threeStarsHTML = starsImage.innerHTML;
 let stars = 3;
+let timer;
+const minsTimer = document.querySelector('.mins');
+const secsTimer = document.querySelector('.secs');
+const tensTimer = document.querySelector('.tens');
+let mins = 0;
+let secs = 0;
+let tens = 0;
 
 let cardDeck = [
     'fa-diamond', 'fa-diamond',
@@ -68,9 +75,10 @@ function newDeck() {
     pack.appendChild(fragment);
 }
 
-//Event Listener for newDeck
+//Event Listener for a full start or restart
 
 reshuffle.addEventListener('mousedown', function() {
+    // Get a new shuffled deck and reset variables
     newDeck();
     moves = 0;
     moveCounter.textContent = moves.toString();
@@ -78,6 +86,7 @@ reshuffle.addEventListener('mousedown', function() {
     updateStars();
     openList = [];
     matches = 0;
+    resetTimer();
 });
 
 
@@ -95,6 +104,10 @@ pack.addEventListener('click', function(evt) {
         //increment move counter
         moves += 1;
         moveCounter.textContent = moves.toString();
+        //start timer if first move
+        if (moves == 1) {
+            runTimer();
+        }
         //update stars
         updateStars();
         //display card
@@ -146,6 +159,7 @@ function matchCards() {
     //inc matches and check if won
     matches += 1;
     if (matches == 8) {
+        stopTimer();
         winnerScreen();
     }
 }
@@ -163,7 +177,8 @@ function hideCards() {
 //Winner screen function - MORE TO CODE HERE!!
 
 function winnerScreen() {
-    alert("YOU WIN! and have " + stars);
+    // Give winning message
+    alert("YOU WON in " + mins + ":" + tens + secs + " with " + stars + "stars");
 }
 
 // Stars function runs each time a card is clicked and a move registered
@@ -175,4 +190,48 @@ function updateStars() {
     }   else if (moves == 0) {
         starsImage.innerHTML = threeStarsHTML;
     }
+}
+
+// Start timer function
+
+function runTimer() {
+    timer = window.setTimeout(iterateTimer, 1000); //needs to use the delay!!
+}
+
+// Stop timer function
+
+function stopTimer() {
+    window.clearTimeout(timer);
+}
+
+// Reset Timer Fucntion
+
+function resetTimer() {
+    stopTimer();
+    secs = 0;
+    tens = 0;
+    mins = 0;
+    secsTimer.innerText = secs;
+    tensTimer.innerText = tens;
+    minsTimer.innerText = mins;
+}
+
+// Iterate Timer Function will run every 1000ms after first move unless stopped by a win or reset.
+
+function iterateTimer() {
+    secs += 1;
+    console.log('iteration occured');
+    console.log(secs);
+    if (secs == 10) {
+        tens += 1;
+        secs = 0;
+    }
+    if (tens == 6) {
+    mins += 1;
+    tens = 0;
+    }
+    secsTimer.innerText = secs;
+    tensTimer.innerText = tens;
+    minsTimer.innerText = mins;
+    runTimer();
 }
