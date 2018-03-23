@@ -41,10 +41,13 @@ let cardDeck = [
 ];
 // Modal variables
 const modal = document.querySelector('.modal');
-var btn = document.getElementById("myBtn"); //for removal
 const close = document.querySelector('.close');
 const modalText = document.querySelector('.modal-text');
-const modalRetry = document.querySelector('.retry-button')
+const modalRetry = document.querySelector('.retry-button');
+const nameModal = document.querySelector('.name-modal');
+const nameSubmit = document.querySelector('.submit-button');
+const newPlayerName = document.querySelector('.inputName');
+let openingWelcome = false;
 
 
 // Shuffle function from http://stackoverflow.com/a/2450976
@@ -108,6 +111,8 @@ function resetAll() {
     openList = [];
     matches = 0;
     resetTimer();
+    // Open Name Modal
+    nameModal.style.display = "block";
 };
 
 
@@ -115,7 +120,7 @@ function resetAll() {
 
 pack.addEventListener('click', function(evt) {
     //check card should be flippable
-    if ((evt.target.nodeName == 'LI') && (evt.target.classList.contains('open') == false) && (evt.target.classList.contains('match') == false) && (openList[1] == null) && (validBoard == true)) {
+    if ((evt.target.nodeName == 'LI') && (evt.target.classList.contains('open') == false) && (evt.target.classList.contains('match') == false) && (openList[1] == null) && (validBoard == true) && (openingWelcome == false)) {
         //increment move counter
         moves += 1;
         moveCounter.textContent = moves.toString();
@@ -297,18 +302,22 @@ function scoresPopulate() {
 }
 
 // Modal Scripts
-// When the user clicks on the button, open the modal
-btn.onclick = function() {
-    winnerScreen();
-}
-
 // Modal Close
 close.addEventListener('click', function() {
-    modal.style.display = "none";
+    modal.style.display = 'none';
 });
 
 //Model Retry button
 modalRetry.addEventListener('click', function() {
-    modal.style.display = "none";
+    modal.style.display = 'none';
     resetAll();
+})
+
+// Name modal scripts
+nameSubmit.addEventListener('click', function(evt) {
+    evt.preventDefault();
+    playerName = newPlayerName.value;
+    newPlayerName.value = null;
+    openingWelcome = false;
+    nameModal.style.display = 'none';
 })
