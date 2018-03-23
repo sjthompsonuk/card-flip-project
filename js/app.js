@@ -16,6 +16,7 @@ let mins = 0;
 let secs = 0;
 let tens = 0;
 let playerName = 'Sam';
+const scoreBoard = document.querySelector('.score-board');
 // 6th place score for adding data before sort and delete. Placeholders needed to make sorting function simple.
 let scores = [
     {name: 'Sam', starValue: 3, timeValue: '0:10', scoreValue: 10},
@@ -151,8 +152,8 @@ function matchCards() {
     matches += 1;
     if (matches == 8) {
         stopTimer();
-        winnerScreen();
         updateScores();
+        winnerScreen();
     }
 }
 
@@ -170,7 +171,11 @@ function hideCards() {
 
 function winnerScreen() {
     // Give winning message
-    alert("YOU WON in " + mins + ":" + tens + secs + " with " + stars + "stars. See th leader board at the bottom");
+    if (stars * (1000 - (mins * 60 + tens * 10 + secs)) == scores[0].scoreValue) {
+        alert("TOP SCORE!!!! YOU WON in " + mins + ":" + tens + secs + " with " + stars + "stars. See the leader board at the bottom");
+    } else {
+    alert("YOU WON in " + mins + ":" + tens + secs + " with " + stars + "stars. See the leader board at the bottom");
+  }
 }
 
 // Stars function runs each time a card is clicked and a move registered
@@ -241,5 +246,30 @@ function updateScores() {
 
 //repopulate from scores array indies 0-4 only (1st to 5th)
 function scoresPopulate() {
-
+    // clear scoreboard  minus table headers
+    for (let i = 0; i < 5; i++) {
+        scoreBoard.removeChild(scoreBoard.lastElementChild);
+    }
+    // create fragment then new table HTML from scores array.
+    const fragment = document.createDocumentFragment();
+    for (let i = 0; i < 5; i++) {
+        let newRow = document.createElement('tr');
+        let newPlace = document.createElement('td');
+        let newName = document.createElement('td');
+        let newStars = document.createElement('td');
+        let newTime = document.createElement('td');
+        let newScore = document.createElement('td');
+        newPlace.textContent = (i + 1);
+        newName.textContent = scores[i].name;
+        newStars.textContent = scores[i].starValue;
+        newTime.textContent = scores[i].timeValue;
+        newScore.textContent = scores[i].scoreValue;
+        newRow.appendChild(newPlace);
+        newRow.appendChild(newName);
+        newRow.appendChild(newStars);
+        newRow.appendChild(newTime);
+        newRow.appendChild(newScore);
+        fragment.appendChild(newRow);
+    }
+    scoreBoard.appendChild(fragment);
 }
