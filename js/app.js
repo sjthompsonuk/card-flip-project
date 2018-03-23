@@ -15,15 +15,16 @@ const tensTimer = document.querySelector('.tens');
 let mins = 0;
 let secs = 0;
 let tens = 0;
+let validBoard = false;
 let playerName = 'Sam';
 const scoreBoard = document.querySelector('.score-board');
 // 6th place score for adding data before sort and delete. Placeholders needed to make sorting function simple.
 let scores = [
-    {name: 'Sam', starValue: 3, timeValue: '0:10', scoreValue: 10},
-    {name: 'No One Yet', starValue: 0, timeValue: '0:00', scoreValue: 0},
-    {name: 'No One Yet', starValue: 0, timeValue: '0:00', scoreValue: 0},
-    {name: 'No One Yet', starValue: 0, timeValue: '0:00', scoreValue: 0},
-    {name: 'No One Yet', starValue: 0, timeValue: '0:00', scoreValue: 0},
+    {name: 'Sam', starValue: 1, timeValue: '10:00', scoreValue: 10},
+    {name: '-', starValue: 0, timeValue: '0:00', scoreValue: 0},
+    {name: '-', starValue: 0, timeValue: '0:00', scoreValue: 0},
+    {name: '-', starValue: 0, timeValue: '0:00', scoreValue: 0},
+    {name: '-', starValue: 0, timeValue: '0:00', scoreValue: 0},
     {}
 ];
 //Set of values relate to Font-Awesome icons
@@ -77,6 +78,8 @@ function newDeck() {
     }
     //Add HTML to DOM
     pack.appendChild(fragment);
+    //Validate Board
+    validBoard = true;
 }
 
 //Event Listener for a full start or restart
@@ -98,7 +101,7 @@ reshuffle.addEventListener('mousedown', function() {
 
 pack.addEventListener('click', function(evt) {
     //check card should be flippable
-    if ((evt.target.nodeName == 'LI') && (evt.target.classList.contains('open') == false) && (evt.target.classList.contains('match') == false) && (openList[1] == null)) {
+    if ((evt.target.nodeName == 'LI') && (evt.target.classList.contains('open') == false) && (evt.target.classList.contains('match') == false) && (openList[1] == null) && (validBoard == true)) {
         //increment move counter
         moves += 1;
         moveCounter.textContent = moves.toString();
@@ -273,3 +276,5 @@ function scoresPopulate() {
     }
     scoreBoard.appendChild(fragment);
 }
+
+// pulsate transformation
