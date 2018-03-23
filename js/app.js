@@ -20,7 +20,7 @@ let playerName = 'Sam';
 const scoreBoard = document.querySelector('.score-board');
 // 6th place score for adding data before sort and delete. Placeholders needed to make sorting function simple.
 let scores = [
-    {name: 'Sam', starValue: 1, timeValue: '10:00', scoreValue: 10},
+    {name: '-', starValue: 0, timeValue: '0:00', scoreValue: 0},
     {name: '-', starValue: 0, timeValue: '0:00', scoreValue: 0},
     {name: '-', starValue: 0, timeValue: '0:00', scoreValue: 0},
     {name: '-', starValue: 0, timeValue: '0:00', scoreValue: 0},
@@ -38,6 +38,13 @@ let cardDeck = [
     'fa-bicycle', 'fa-bicycle',
     'fa-bomb', 'fa-bomb'
 ];
+// Modal variables
+const modal = document.querySelector('.modal');
+var btn = document.getElementById("myBtn"); //for removal
+const close = document.querySelector('.close');
+const modalText = document.querySelector('.modal-text');
+const modalRetry = document.querySelector('.retry-button')
+
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -85,6 +92,10 @@ function newDeck() {
 //Event Listener for a full start or restart
 
 reshuffle.addEventListener('mousedown', function() {
+    resetAll();
+});
+
+function resetAll() {
     // Get a new shuffled deck and reset variables
     newDeck();
     moves = 0;
@@ -94,7 +105,7 @@ reshuffle.addEventListener('mousedown', function() {
     openList = [];
     matches = 0;
     resetTimer();
-});
+};
 
 
 // Card click listener
@@ -175,10 +186,12 @@ function hideCards() {
 function winnerScreen() {
     // Give winning message
     if (stars * (1000 - (mins * 60 + tens * 10 + secs)) == scores[0].scoreValue) {
-        alert("TOP SCORE!!!! YOU WON in " + mins + ":" + tens + secs + " with " + stars + "stars. See the leader board at the bottom");
+        modalText.innerText = "TOP SCORE!!!! YOU WON in... " + mins + ":" + tens + secs + " with " + stars + " stars."
+        modal.style.display = "block";
     } else {
-    alert("YOU WON in " + mins + ":" + tens + secs + " with " + stars + "stars. See the leader board at the bottom");
-  }
+        modalText.innerText = "YOU WON in... " + mins + ":" + tens + secs + " with " + stars + " stars."
+        modal.style.display = "block";
+    }
 }
 
 // Stars function runs each time a card is clicked and a move registered
@@ -277,4 +290,19 @@ function scoresPopulate() {
     scoreBoard.appendChild(fragment);
 }
 
-// pulsate transformation
+// Modal Scripts
+// When the user clicks on the button, open the modal
+btn.onclick = function() {
+    winnerScreen();
+}
+
+// Modal Close
+close.addEventListener('click', function() {
+    modal.style.display = "none";
+});
+
+//Model Retry button
+modalRetry.addEventListener('click', function() {
+    modal.style.display = "none";
+    resetAll();
+})
