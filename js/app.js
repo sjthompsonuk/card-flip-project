@@ -48,6 +48,7 @@ const modalText2 = document.querySelector('.modal-text2');
 const modalRetry = document.querySelector('.retry-button');
 const nameModal = document.querySelector('.name-modal');
 const nameSubmit = document.querySelector('.submit-button');
+const nameForm = document.querySelector('.name-form');
 const newPlayerName = document.querySelector('.inputName');
 let openingWelcome = false;
 
@@ -320,6 +321,14 @@ modalRetry.addEventListener('click', function() {
 
 // Name modal scripts
 nameSubmit.addEventListener('click', function(evt) {
+    evt.preventDefault();
+    playerName = newPlayerName.value;
+    newPlayerName.value = null;
+    openingWelcome = false;
+    nameModal.style.display = 'none';
+})
+
+nameForm.addEventListener('submit', function(evt) {
     evt.preventDefault();
     playerName = newPlayerName.value;
     newPlayerName.value = null;
