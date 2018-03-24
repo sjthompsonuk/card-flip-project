@@ -24,7 +24,7 @@ img {
 /* Body */
 
 body {
-    background: #ffffff url('../img/geometry2.png'); /* Background pattern from Subtle Patterns */
+    background: #fff url('../img/geometry2.png'); /* Background pattern from Subtle Patterns */
     font-family: 'Coda', cursive;
 }
 
@@ -222,6 +222,11 @@ h3 {
     text-align: center;
 }
 
+.inputName {
+    width: 70%;
+    border: 2px solid #888;
+}
+
 input[type="text"] {
     font-family: 'Coda', cursive;
     font-size: 24px;
@@ -251,6 +256,8 @@ input[type="text"] {
     .modal-content {
         min-height: 150px;
     }
+    input[type="text"] {
+        font-size: 10px;
 }
 
 @media screen and (min-width: 580px) {
