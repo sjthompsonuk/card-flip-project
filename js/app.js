@@ -41,7 +41,7 @@ let hider;
 
 //Validation Variables
 let validBoard = false;
-let openingWelcome = false; //TODO - NEED TO FIX LACK OF USE
+let openingWelcome = false;
 
 //Score Board Array of Objects, spare slot at 6, needs to be filled or sort doesn't work
 let scores = [
@@ -127,6 +127,8 @@ function resetAll() {
     resetTimer();
     // Open Name Request Modal
     nameModal.style.display = "block";
+    //Adjust Validator to prevent gameplay
+    openingWelcome = true;
 }
 
 // Name Request Modal
