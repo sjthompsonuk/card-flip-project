@@ -1,5 +1,7 @@
 <!doctype html>
 <html lang="en">
+
+<!-- Head -->
 <head>
     <meta charset="utf-8">
     <title>Sam's Matching Game</title>
@@ -8,150 +10,174 @@
     <link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Coda">
     <link rel="stylesheet" href="css/app.css">
 </head>
-<body>
 
+<!-- Body -->
+<body>
     <div class="container">
+
+        <!-- Header -->
         <header>
             <h1>Sam's Matching Game</h1>
         </header>
 
-        <section class="score-panel">
+        <!-- Score Panel -->
+        <div class="score-panel">
+            <ul class="stars">
+        	    	<li>
+                    <i class="fa fa-star"></i>
+                </li>
+        		    <li>
+                    <i class="fa fa-star"></i>
+                </li>
+        		    <li>
+                    <i class="fa fa-star"></i>
+                </li>
+        	  </ul>
 
-          <ul class="stars">
-        		<li><i class="fa fa-star"></i></li>
-        		<li><i class="fa fa-star"></i></li>
-        		<li><i class="fa fa-star"></i></li>
-        	</ul>
+          	<span class="moves">3</span> Moves
+            <div class="timer">
+                <span class="mins">0</span>
+                <span>:</span>
+                <span class="tens">0</span>
+                <span class="secs">0</span>
+            </div>
+            <div class="restart">
+                <span class="start">Restart</span>
+                <i class="fa fa-repeat"></i>
+        	  </div>
+        </div>
 
-        	<span class="moves">3</span> Moves
+        <!-- Card Area -->
+        <div class="pack">
+            <ul class="deck">
+                <li class="card">
+                    <i class="fa fa-diamond"></i>
+                </li>
+                <li class="card">
+                    <i class="fa fa-paper-plane-o"></i>
+                </li>
+                <li class="card match">
+                    <i class="fa fa-anchor"></i>
+                </li>
+                <li class="card">
+                    <i class="fa fa-bolt"></i>
+                </li>
+                <li class="card">
+                    <i class="fa fa-cube"></i>
+                </li>
+                <li class="card match">
+                    <i class="fa fa-anchor"></i>
+                </li>
+                <li class="card">
+                    <i class="fa fa-leaf"></i>
+                </li>
+                <li class="card">
+                    <i class="fa fa-bicycle"></i>
+                </li>
+                <li class="card">
+                    <i class="fa fa-diamond"></i>
+                </li>
+                <li class="card">
+                    <i class="fa fa-bomb"></i>
+                </li>
+                <li class="card">
+                    <i class="fa fa-leaf"></i>
+                </li>
+                <li class="card">
+                    <i class="fa fa-bomb"></i>
+                </li>
+                <li class="card open show">
+                    <i class="fa fa-bolt"></i>
+                </li>
+                <li class="card">
+                    <i class="fa fa-bicycle"></i>
+                </li>
+                <li class="card">
+                    <i class="fa fa-paper-plane-o"></i>
+                </li>
+                <li class="card">
+                    <i class="fa fa-cube"></i>
+                </li>
+            </ul>
+        </div>
 
-          <div class="timer">
-            <span class="mins">0</span>
-            <span>:</span>
-            <span class="tens">0</span>
-            <span class="secs">0</span>
-          </div>
-
-          <div class="restart">
-            <span class="start">Restart</span>
-            <i class="fa fa-repeat"></i>
-        	</div>
-        </section>
-        <section class="pack">
-          <ul class="deck">
-              <li class="card">
-                  <i class="fa fa-diamond"></i>
-              </li>
-              <li class="card">
-                  <i class="fa fa-paper-plane-o"></i>
-              </li>
-              <li class="card match">
-                  <i class="fa fa-anchor"></i>
-              </li>
-              <li class="card">
-                  <i class="fa fa-bolt"></i>
-              </li>
-              <li class="card">
-                  <i class="fa fa-cube"></i>
-              </li>
-              <li class="card match">
-                  <i class="fa fa-anchor"></i>
-              </li>
-              <li class="card">
-                  <i class="fa fa-leaf"></i>
-              </li>
-              <li class="card">
-                  <i class="fa fa-bicycle"></i>
-              </li>
-              <li class="card">
-                  <i class="fa fa-diamond"></i>
-              </li>
-              <li class="card">
-                  <i class="fa fa-bomb"></i>
-              </li>
-              <li class="card">
-                  <i class="fa fa-leaf"></i>
-              </li>
-              <li class="card">
-                  <i class="fa fa-bomb"></i>
-              </li>
-              <li class="card open show">
-                  <i class="fa fa-bolt"></i>
-              </li>
-              <li class="card">
-                  <i class="fa fa-bicycle"></i>
-              </li>
-              <li class="card">
-                  <i class="fa fa-paper-plane-o"></i>
-              </li>
-              <li class="card">
-                  <i class="fa fa-cube"></i>
-              </li>
-          </ul>
-        </section>
-
+        <!-- Top 5 Scores -->
         <section class="score-section">
             <h3>Top Five Scores</h3>
             <table>
-              <tbody class="score-board">
-                <tr>
-                    <th>Rank</th>
-                    <th>Player</th>
-                    <th>Stars</th>
-                    <th>Time</th>
-                    <th>Score</th>
-                </tr>
-                <tr>
-                    <td>1</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                </tr>
-              </tbody>
+                <tbody class="score-board">
+                    <tr>
+                        <th>Rank</th>
+                        <th>Player</th>
+                        <th>Stars</th>
+                        <th>Time</th>
+                        <th>Score</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
             </table>
         </section>
-
     </div>
 
     <!-- Naming Modal -->
     <div class="name-modal">
-
-      <!-- Naming Modal content -->
-      <div class="name-modal-content">
-        <form class="name-form">
-            <p>Please enter your name:<p>
-            <input type="text" class="inputName" name="nameField">
-            <p class="submit-button">Click to Submit</p>
-        </form>
-      </div>
-
+        <div class="name-modal-content">
+            <form class="name-form">
+                <p>Please enter your name:<p>
+                <input type="text" class="inputName" name="nameField">
+                <p class="submit-button">Click to Submit</p>
+            </form>
+        </div>
     </div>
 
-
-    <!-- The Modal -->
+    <!-- The Winning Modal -->
     <div class="modal">
-
-      <!-- Modal content -->
-      <div class="modal-content">
-        <p class="modal-text1">TOP SCORE of 1000!!!!</p>
-        <p class="modal-text2">YOU WON in 00:00 with 2 stars.</p>
-        <p>Check the leader board below</p>
-        <p>Would you like to play again?</p>
-        <span class="retry-button">Click to Play</span>
-        <span class="close">Click to Close</span>
-      </div>
-
+        <div class="modal-content">
+            <p class="modal-text1">TOP SCORE of 1000!!!!</p>
+            <p class="modal-text2">YOU WON in 00:00 with 2 stars.</p>
+            <p>Check the leader board below</p>
+            <p>Would you like to play again?</p>
+            <span class="retry-button">Click to Play</span>
+            <span class="close">Click to Close</span>
+        </div>
     </div>
 
+    <!-- Script -->
     <script src="js/app.js"></script>
+
 </body>
 </html>
