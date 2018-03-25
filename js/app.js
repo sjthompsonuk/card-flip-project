@@ -109,7 +109,9 @@ function newDeck() {
 }
 
 //Event Listener for a full start or restart
-reshuffle.addEventListener('mousedown', function() {
+reshuffle.addEventListener('mousedown', function(evt) {
+    //prevent ipad non-functionality
+    evt.preventDefault();
     resetAll();
 });
 //Reset function seperated out so it can be called from other functions.
